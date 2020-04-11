@@ -1,6 +1,6 @@
-# Svelte with TypeScript Template
+# Steppa
 
-Template repository for bootstrapping a Svelte with TypeScript project.
+Steppa is a random avatar generator
 
 ---
 
