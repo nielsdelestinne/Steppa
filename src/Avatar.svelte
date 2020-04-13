@@ -10,7 +10,7 @@
         for (let y = 0; y < finalGeneration.length; y++) {
             for (let x = 0; x < finalGeneration[y].length; x++) {
                 ctx.beginPath();
-                ctx.rect(x * 10 + 10, y * 10 + 10, 10, 10);
+                ctx.rect(x * 10, y * 10, 10, 10);
                 ctx.fillStyle = finalGeneration[y][x] ? "#c4c3c3" : "#0aac8b";
                 ctx.fill();
                 if(finalGeneration[y][x]) {

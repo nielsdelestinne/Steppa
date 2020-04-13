@@ -15,7 +15,17 @@ export class AvatarGeneration {
             newGeneration = this.nextGeneration(newGeneration);
         }
         let copyOfFinalGenerationFlippedHorizontally = this.makeCopyAndFlipHorizontally(newGeneration);
-        return this.mergeLeftAndRightPart(newGeneration, copyOfFinalGenerationFlippedHorizontally);
+        let fullGeneration = this.mergeLeftAndRightPart(newGeneration, copyOfFinalGenerationFlippedHorizontally);
+
+        fullGeneration.unshift(new Array(fullGeneration.length).fill(false));
+        fullGeneration.push(new Array(fullGeneration.length).fill(false));
+
+        for (let y = 0; y < fullGeneration.length; y++) {
+            fullGeneration[y].unshift(false);
+            fullGeneration[y].push(false);
+        }
+
+        return fullGeneration;
     }
 
     private mergeLeftAndRightPart(leftSide: boolean[][], rightSide: boolean[][]) {
