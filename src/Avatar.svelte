@@ -60,11 +60,11 @@
 
 </script>
 
-<div>
-    Random Boy {index} <br/>
-
-    <canvas bind:this={canvasElement} height="{canvasHeight}px" width="{canvasWidth}px"></canvas>
-
+<div class="avatar">
+    <div>Random Boy {index}</div>
+    <div>
+        <canvas bind:this={canvasElement} height="{canvasHeight}px" width="{canvasWidth}px"></canvas>
+    </div>
 </div>
 
 <style>
@@ -72,7 +72,7 @@
         background-color: #0aac8b;
     }
 
-    div {
+    .avatar {
         background-color: #efefef;
         border: 1px solid #cccccc;
         padding: 1rem;
