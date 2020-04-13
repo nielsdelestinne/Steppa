@@ -1,3 +1,5 @@
+import {Cell} from "./cell.class";
+
 export class AvatarGeneration {
 
     private readonly initialGeneration: boolean[][];
@@ -9,7 +11,7 @@ export class AvatarGeneration {
         this.initialGeneration = this.createInitialGenerationWithRandomSeed();
     }
 
-    public start(amountOfGenerations = 2): boolean[][] {
+    public start(amountOfGenerations = 2): Cell[][] {
         let newGeneration: boolean[][] = this.initialGeneration;
         for (let i = 0; i < amountOfGenerations; i++) {
             newGeneration = this.nextGeneration(newGeneration);
@@ -18,14 +20,29 @@ export class AvatarGeneration {
         let fullGeneration = this.mergeLeftAndRightPart(newGeneration, copyOfFinalGenerationFlippedHorizontally);
 
         fullGeneration.unshift(new Array(fullGeneration.length).fill(false));
+        fullGeneration.unshift(new Array(fullGeneration.length).fill(false));
+        fullGeneration.push(new Array(fullGeneration.length).fill(false));
         fullGeneration.push(new Array(fullGeneration.length).fill(false));
 
         for (let y = 0; y < fullGeneration.length; y++) {
             fullGeneration[y].unshift(false);
+            fullGeneration[y].unshift(false);
+            fullGeneration[y].push(false);
             fullGeneration[y].push(false);
         }
 
-        return fullGeneration;
+        return this.mapToCells(fullGeneration);
+
+    }
+
+    private mapToCells(fullGeneration: boolean[][]): Cell[][] {
+        const cells = Array.from(Array(fullGeneration.length), () => new Array(fullGeneration[0].length).fill(false));
+        for (let y = 0; y < fullGeneration.length; y++) {
+            for (let x = 0; x < fullGeneration[y].length; x++) {
+                cells[y][x] = new Cell(fullGeneration[y][x], this.countNeighbours(x, y, fullGeneration))
+            }
+        }
+        return cells;
     }
 
     private mergeLeftAndRightPart(leftSide: boolean[][], rightSide: boolean[][]) {
@@ -77,13 +94,13 @@ export class AvatarGeneration {
             this.countNeighbour(xLeft, y, generation) +
             this.countNeighbour(xRight, yUp, generation) +
             this.countNeighbour(xRight, yDown, generation) +
-            this.countNeighbour(xRight, yUp, generation) +
+            this.countNeighbour(xRight, y, generation) +
             this.countNeighbour(x, yUp, generation) +
             this.countNeighbour(x, yDown, generation);
     }
 
     private countNeighbour(x: number, y: number, generation: boolean[][]) {
-        if (x < 0 || y < 0 || x >= this.amountOfCellsOnX || y >= this.amountOfCellsOnY) {
+        if (x < 0 || y < 0 || x >= generation[0].length || y >= generation.length) {
             return 0;
         }
         return generation[y][x] ? 1 : 0;
