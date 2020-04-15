@@ -18,12 +18,15 @@
 <main>
 	<h1>{name}</h1>
 
-	Height <input bind:value={canvasHeight} type="number" min="100" max="800" disabled="{avatars > 0}">
-	Width <input bind:value={canvasWidth} type="number" min="100" max="800" disabled="{avatars > 0}">
-	Size of Cell <input bind:value={cellSize} type="number" min="1" max="100">
-	Generations <input bind:value={amountOfGenerations} type="number" min="1" max="100">
+	<ul>
+		<li>Height: <input bind:value={canvasHeight} type="number" min="100" max="800" disabled="{avatars > 0}"></li>
+		<li>Width: <input bind:value={canvasWidth} type="number" min="100" max="800" disabled="{avatars > 0}"></li>
+		<li>Size of Cell: <input bind:value={cellSize} type="number" min="1" max="100"></li>
+		<li>Generations: <input bind:value={amountOfGenerations} type="number" min="1" max="100"></li>
+	</ul>
+	<br>
+	<button on:click={addAvatar}>Generate</button>
 
-	<hr>
 
 	<div class="avatars-container">
 	{#each Array(avatars) as _, i}
@@ -31,7 +34,10 @@
 	{/each}
 	</div>
 
-	<button on:click={addAvatar}>+</button>
+	{#if avatars > 0}
+		<button on:click={addAvatar}>Generate</button>
+	{/if}
+
 </main>
 
 <style>
@@ -39,6 +45,14 @@
 		text-align: center;
 		margin: 0 auto;
 		max-width: 1400px;
+	}
+
+	ul li{
+		display: inline;
+	}
+
+	li {
+		margin-left: 5px;
 	}
 
 	.avatars-container {

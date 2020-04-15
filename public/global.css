@@ -38,7 +38,8 @@ input {
 	border-width: 1px;
 	border-color: #929292;
 	background-color: #f6f6f6;
-	color: #454545;
+	color: #0aac8b;
+	font-weight: bold;
 	border-style: solid;
 	box-shadow: 1px 1px 4px rgba(66,66,66,.20);
 }
@@ -78,7 +79,6 @@ button {
 	cursor:pointer;
 	color:#777777;
 	font-size:28px;
-	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:1px 1px 0 #ffffff;
