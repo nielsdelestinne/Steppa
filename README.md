@@ -4,6 +4,8 @@ Steppa is a random avatar generator
 
 ---
 
+![Steppa](Steppa-600px-8generations.png)
+
 ## Technology
 Created using Svelte
 - Bootstrapped from [sveltejs/component-template](https://github.com/sveltejs/component-template)
